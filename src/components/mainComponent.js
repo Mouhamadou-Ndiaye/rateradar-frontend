@@ -9,7 +9,8 @@ import { Grid } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
-
+import { createData } from "../components/table";
+import { rows } from "../components/table";
 
 const useStyles = makeStyles((theme) => ({
         section1 : 
@@ -77,6 +78,21 @@ const Home = () =>
 {
     const [selectedCountrySend, setSelectedCountrySend] = useState("FR");
     const [selectedCountryReceive, setSelectedCountryReceive] = useState("SN");
+    const [tableKey, setTableKey] = useState(0);
+
+    function updateTable(value)
+    {
+        rows.push(createData(value, 305, 3.7, 67, 4.3))
+        console.log('done')
+        setTableKey(prevKey => prevKey + 1);
+    }
+
+    function updateTableSecond(value)
+    {
+        rows.push(createData(value, 305, 3.7, 67, 4.3))
+        console.log('done')
+        setTableKey(prevKey => prevKey + 1);
+    }
 
     const classes = useStyles();
     return(
@@ -84,8 +100,64 @@ const Home = () =>
         <div>
 
             <Box>
+                 <Grid backgroundColor="#f9fafb" padding="50px" display="flex" justifyContent="center" flexDirection="column" alignContent="center" alignItems="center" gap="25px">
 
-                
+                            <div alignContent="center" alignItems="center">
+                                <FormControl height="50px" sx={{width: { xs: '60%', md: 'auto' }}}>
+                                    <InputLabel htmlFor="outlined-adornment-amount">Montant Envoyé</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-amount"
+                                        label="Montant Envoyé"
+                                        placeholder="1€"
+                                    />
+                                </FormControl>
+                                <>
+                                    <ReactFlagsSelect
+                                    selected={selectedCountrySend}
+                                    searchable={false}
+                                    onSelect={(code) => setSelectedCountrySend(code) & updateTable(selectedCountrySend)}
+                                    showOptionLabel={true}
+                                    showSelectedLabel={false}
+                                    showSecondaryOptionLabel={false}
+                                    showSecondarySelectedLabel={false}
+                                    optionsSize={16}
+                                    selectedSize={30}
+                                    fullWidth={false}
+                                    alignOptionsToRight={true}
+                                    countries={["US", "GB", "FR", "DE", "IT", "NG"]}
+                                />
+                                </>
+                            </div>
+
+                            <div alignContent="center" alignItems="center">
+                                <FormControl height="50px" sx={{ width: { xs: '60%', md: 'auto' }}}>
+                                    <InputLabel htmlFor="outlined-adornment-amount">Montant Reçu</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-amount"
+                                        label="Montant Reçu"
+                                        placeholder="655FCFA"
+                                    />
+                                </FormControl>
+                                <>
+                                    <ReactFlagsSelect
+                                        selected={selectedCountryReceive}
+                                        onSelect={(code) => setSelectedCountryReceive(code) & updateTableSecond(selectedCountryReceive)}
+                                        showOptionLabel={true}
+                                        showSelectedLabel={false}
+                                        showSecondaryOptionLabel={false}
+                                        showSecondarySelectedLabel={false}
+                                        optionsSize={16}
+                                        selectedSize={30}
+                                        fullWidth={false}
+                                        alignOptionsToRight={true}
+                                    />
+                                </>
+                            </div>
+
+                    </Grid>
+
+                    <Table key={tableKey}/>
+
                     <Grid className={classes.section1}>
 
                         <img src={`${calcul}`} height="300px" width="350px" alt="svg medecin"/>
@@ -103,62 +175,6 @@ const Home = () =>
 
                     </Grid>
 
-                    <Grid backgroundColor="#f9fafb" padding="50px" display="flex" justifyContent="center" flexDirection="column" alignContent="center" alignItems="center" gap="25px">
-
-                            <div alignContent="center" alignItems="center">
-                                <FormControl height="50px" sx={{width: { xs: '60%', md: 'auto' }}}>
-                                    <InputLabel htmlFor="outlined-adornment-amount">Montant Envoyé</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-amount"
-                                        label="Montant Envoyé"
-                                        placeholder="1€"
-                                    />
-                                </FormControl>
-                                <>
-                                    <ReactFlagsSelect
-                                    selected={selectedCountrySend}
-                                    searchable={false}
-                                    onSelect={(code) => setSelectedCountrySend(code)}
-                                    showOptionLabel={true}
-                                    showSelectedLabel={false}
-                                    showSecondaryOptionLabel={false}
-                                    showSecondarySelectedLabel={false}
-                                    optionsSize={16}
-                                    selectedSize={30}
-                                    fullWidth={false}
-                                    alignOptionsToRight={true}
-                                />
-                                </>
-                            </div>
-
-                            <div alignContent="center" alignItems="center">
-                                <FormControl height="50px" sx={{ width: { xs: '60%', md: 'auto' }}}>
-                                    <InputLabel htmlFor="outlined-adornment-amount">Montant Reçu</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-amount"
-                                        label="Montant Reçu"
-                                        placeholder="655FCFA"
-                                    />
-                                </FormControl>
-                                <>
-                                    <ReactFlagsSelect
-                                        selected={selectedCountryReceive}
-                                        onSelect={(code) => setSelectedCountryReceive(code)}
-                                        showOptionLabel={true}
-                                        showSelectedLabel={false}
-                                        showSecondaryOptionLabel={false}
-                                        showSecondarySelectedLabel={false}
-                                        optionsSize={16}
-                                        selectedSize={30}
-                                        fullWidth={false}
-                                        alignOptionsToRight={true}
-                                    />
-                                </>
-                            </div>
-
-                    </Grid>
-
-                    <Table/>
                 <Box>
                     
                 </Box>
