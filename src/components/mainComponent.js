@@ -115,7 +115,7 @@ const Home = () =>
                                     <ReactFlagsSelect
                                     selected={selectedCountrySend}
                                     searchable={false}
-                                    onSelect={(code) => setSelectedCountrySend(code) & updateTable(selectedCountrySend)}
+                                    onSelect={(code) => setSelectedCountrySend(code) & updateTable(code)}
                                     showOptionLabel={true}
                                     showSelectedLabel={false}
                                     showSecondaryOptionLabel={false}
@@ -141,7 +141,7 @@ const Home = () =>
                                 <>
                                     <ReactFlagsSelect
                                         selected={selectedCountryReceive}
-                                        onSelect={(code) => setSelectedCountryReceive(code) & updateTableSecond(selectedCountryReceive)}
+                                        onSelect={(code) => setSelectedCountryReceive(code) & updateTableSecond(code)}
                                         showOptionLabel={true}
                                         showSelectedLabel={false}
                                         showSecondaryOptionLabel={false}
