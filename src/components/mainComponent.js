@@ -150,6 +150,7 @@ const Home = () =>
                                         selectedSize={30}
                                         fullWidth={false}
                                         alignOptionsToRight={true}
+                                        countries={["US", "GB", "FR", "DE", "IT", "NG"]}
                                     />
                                 </>
                             </div>
